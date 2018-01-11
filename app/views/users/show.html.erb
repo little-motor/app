@@ -1,0 +1,27 @@
+<%= render 'layouts/header' %>
+<% provide(:title, @user.name) %>
+  <div class="row">
+    <aside class="col-md-4"> 
+      <section class="user_info">
+        <h1>
+          <%= gravatar_for @user %>
+          <%= @user.name %>
+        </h1>
+      </section>
+    </aside>
+    <div class="col-md-8">
+      <% if @user.microposts.any? %>
+        <h3>Microposts (<%= @user.microposts.count %>)</h3> 
+        <ol class="microposts">
+          <%= render @microposts %> 
+          <!--Rails 会把 @users 当作一个 User 对象列表，
+传给 render 方法后，Rails 会自动遍历这个列表，
+然后使用局部 视图 _user.html.erb 渲染每个对象-->
+        </ol>
+        <%= will_paginate @microposts %> 
+      <% end %>
+    </div>
+  </div>
+
+
+<%= @user.name %>, <%= @user.email %>

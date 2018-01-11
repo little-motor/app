@@ -1,0 +1,6 @@
+<!--生成邮件程序时，Rails 还会为每个邮件程序生成两个视图模板，一个用于纯文本邮件，一个用于HTML邮件-->
+Hi <%= @user.name %>,
+
+Welcome to the Sample App! Click on the link below to activate your account:
+
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
