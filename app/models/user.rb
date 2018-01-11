@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   attr_accessor :remember_token, :activation_token #存取器
 	before_save :downcase_email
+  #在Users controller中，在create动作执行前做的动作
   before_create :create_activation_digest
 
 	validates :name, presence: true, length: { maximum:50 }
@@ -25,7 +26,8 @@ class User < ApplicationRecord
 
     # 返回一个随机令牌 
     def User.new_token #定义为一个类的方法
-      SecureRandom.urlsafe_base64 
+      #ruby随机函数库，产生base64 urlsafe随机函数，a-z，A-Z，0-9，-,_.
+      SecureRandom.urlsafe_base64   
     end
     
     #为了持久保存会话，在数据库中记住用户
@@ -38,6 +40,8 @@ class User < ApplicationRecord
     def forget
       update_attribute(:remember_digest,nil)
     end
+
+
     # 如果指定的令牌和摘要匹配，返回true
     def authenticated?(attribute,token)
       digest = send("#{attribute}_digest")
@@ -71,6 +75,7 @@ class User < ApplicationRecord
 
         #创建并赋予激活令牌和摘要
         def create_activation_digest
+          #返回一个随机令牌
           self.activation_token=User.new_token
           self.activation_digest=User.digest(activation_token)
         end

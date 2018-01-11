@@ -18,12 +18,12 @@
     @users = User.paginate(page: params[:page])
   end
 
-  #存储用户
+  #注册用户
   def create
     @user = User.new(user_params) 
     if @user.save    # 将内存中的数据插入数据库，返回true和false
-       @user.send_activation_email
-       flash[:info] = "Please check your email to activate your email."
+      # @user.send_activation_email
+      # flash[:info] = "Please check your email to activate your email."
        redirect_to login_url
     else
         render 'new' 
