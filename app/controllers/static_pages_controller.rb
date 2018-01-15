@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
+#负责登录和退出功能
+
   def home
   	if logged_in?
   	  @micropost  = current_user.microposts.build
