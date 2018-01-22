@@ -9,7 +9,15 @@ module SessionsHelper
   end
 
 
-  # 返回cookie中记忆令牌对应的用户
+  # 在持久cookies中记住用户
+  def remember(user)
+    user.remember
+    cookies.permanent.signed[:user_id] = user.id
+    cookies.permanent[:remember_token] = user.remember_token
+  end
+
+  
+  # 返回当前登录的用户信息
   def current_user
     #分两种情况，第一种会话存在时，通过会话查找
     #如果session[:user_id]存在返回id值
@@ -30,32 +38,15 @@ module SessionsHelper
     end
   end
 
-
-  # 如果指定用户是当前用户，返回true,遵守rails的一般规定，意思更加明确
-  def current_user?(user)
-    user == current_user
-  end
-
-
   # 如果用户已登录，返回 true，否则返回 false 
   def logged_in?
     !current_user.nil? 
   end
 
 
-  #忘记持久会话
-  def forget(user)
-    user.forget
-    cookies.delete(:user_id)
-    cookies.delete(:remember_token)
-  end
-
-
-  # 在持久会话中记住用户
-  def remember(user)
-    user.remember
-    cookies.permanent.signed[:user_id] = user.id
-    cookies.permanent[:remember_token] = user.remember_token
+  # 如果指定用户是当前用户，返回true,遵守rails的一般规定，意思更加明确
+  def current_user?(user)
+    user == current_user
   end
 
 
@@ -73,12 +64,18 @@ module SessionsHelper
     session.delete(:forwar_url) 
   end
 
+  #忘记持久会话
+  def forget(user)
+    user.forget
+    cookies.delete(:user_id)
+    cookies.delete(:remember_token)
+  end
 
+  
   #退出当前用户
   def log_out
     forget(current_user)
     session.delete(:user_id)
     @current_user = nil
   end
-  
 end

@@ -36,7 +36,7 @@ class SessionsController < ApplicationController
     end
   end
   
-  
+  #退出账户
   def destroy
     log_out if logged_in?
     redirect_to root_url

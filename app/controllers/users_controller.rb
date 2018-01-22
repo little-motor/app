@@ -16,12 +16,12 @@
                                   only: :destroy
   ###################################################################
 
-  #用于新建用户，填写注册信息时使用，对应GET
+  #用于注册用户，填写注册信息时使用，对应GET
   def new
     @user = User.new
   end
 
-  #用于新建用户，处理提交的信息写入数据库，对应POST
+  #用于注册用户，处理提交的信息写入数据库，对应POST
   def create
     #user_params健壮参数，指定输入参数，避免批量赋值漏洞
     #params.require(:user).permit(:name, :email, :password,
