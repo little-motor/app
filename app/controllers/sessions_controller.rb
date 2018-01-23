@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       #验证用户激活状态
       #activated为users表字段，默认false
-      if user.activated?
+      #if user.activated?
         #将user存入session方法中
         log_in user
         #根据记住我选项的值确认是否记住登陆用户
@@ -25,11 +25,11 @@ class SessionsController < ApplicationController
                       remember(user) : forget(user)
         #redirect_back_to用于缓存为登入时的路径，人性化设计
         redirect_back_to user_url(user)
-      else
-        message = "账户未激活，强检查您的邮件"
-        flash[:warning] = message
-        redirect_to login_path
-      end
+      # else
+      #   message = "账户未激活，强检查您的邮件"
+      #   flash[:warning] = message
+      #   redirect_to login_path
+      # end
     else
       flash.now[:danger] = '无效的账户或者密码'
       render 'new' 

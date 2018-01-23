@@ -1,5 +1,8 @@
-<% provide(:title, 'All users') %> 
-<h1>All users</h1>
+<!-- 显示用户 -->
+<% provide(:title, '管理用户') %> 
+<!-- 显示所有用户，超级管理员可以进行用户编辑 -->
+
+<h1>管理用户</h1>
 
 <!-- 分页插件 -->
 <%= will_paginate %>
@@ -9,7 +12,7 @@
    <%= render @users %>
 <!--Rails 会把 @users 当作一个 User 对象列表，
 传给 render 方法后，Rails 会自动遍历这个列表，
-然后使用局部 视图 _user.html.erb 渲染每个对象-->
+然后使用局部视图 _user.html.erb 渲染每个对象-->
 </ul>
 
 <%= will_paginate %>
