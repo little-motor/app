@@ -23,8 +23,8 @@ class SessionsController < ApplicationController
         #根据记住我选项的值确认是否记住登陆用户
         params[:session][:remember_me] == '1' ? 
                       remember(user) : forget(user)
-        #redirect_back_to用于缓存为登入时的路径，人性化设计
-        redirect_back_to user_url(user)
+       #user_url需要user确定route的id
+        redirect_to user_url(user)
       # else
       #   message = "账户未激活，强检查您的邮件"
       #   flash[:warning] = message

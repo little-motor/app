@@ -68,7 +68,8 @@ class User < ApplicationRecord
     end
 
 
-    #实现动态流
+    #每个用户都有一个动态流，查找用户发表的所有信息
+    
     def feed
       Micropost.where("user_id=?",id)
     end

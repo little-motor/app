@@ -21,18 +21,22 @@ class MicropostsController < ApplicationController
   end
 
 
+  #删除信息
   def destroy 
+    #destroy和delete都会删除数据库信息
+    #destroy会调用Active Record的回调和函数验证
+    #确保数据库一致性和模型业务逻辑
     @micropost.destroy
     flash[:success] = "内容删除成功"
+    #重新回到之前请求的网站或者根目录
     redirect_to request.referrer || root_url
-    #表示前一个URL
   end
 ############################################################
     private
 
       #限制微博输入参数
       def micropost_params 
-      	params.require(:micropost).permit(:content, :picture)
+      	params.require(:micropost).permit(:content)
       end
 
 

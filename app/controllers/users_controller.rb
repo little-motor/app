@@ -55,7 +55,7 @@
   end
 
 
-  #在数据库查找编辑和更新用户
+  #在数据库查找用户
   def edit
     #因为在before_action中的curroct_user已经完成查找和赋值，此处不再需要
     #@user = User.find(params[:id])
@@ -63,14 +63,14 @@
   end
 
 
-  # 更新用户，对应Patch动作
+  # 更新用户资料，对应Patch动作
   def update
     #因为在before_action中已经完成查找和赋值，此处不再需要
     #@user = User.find(params[:id]) 
     #注注注意此处以ID为条件查找必须为find，不是find_by
     #update_attributes接受指定对象的属性散列作为参数，修改成为返回true
     if @user.update_attributes(user_params)
-       flash[:succes] = "Profile Updated!"
+       flash[:succes] = "更新成功!"
        #redirect_to执行动作，转向新的页面，render用于本页的渲染
        #指向show
        redirect_to user_url(@user)

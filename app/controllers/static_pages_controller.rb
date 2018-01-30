@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-#负责登录和退出功能
+#负责home页面
 
   def home
   	if logged_in?
@@ -8,9 +8,4 @@ class StaticPagesController < ApplicationController
   	end
   end
 
-  def help
-  end
-
-  def about
-  end
 end
