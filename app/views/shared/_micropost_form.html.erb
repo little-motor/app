@@ -1,5 +1,8 @@
 <!-- 微博编辑模块 -->
-
+<!-- 使用记录识别技术（resources:microposts）
+  可以将模型实例传递给form_for方法作为参数 
+  url:对应路由选项
+  htlm:对应html选项-->
 <%= form_for(@micropost) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <!-- f.object即为@micropost -->
@@ -12,6 +15,7 @@
     <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %> 
   </span>
 <% end %>
+
 
 <script type="text/javascript"> 
   $('#micropost_picture').bind('change', function() {

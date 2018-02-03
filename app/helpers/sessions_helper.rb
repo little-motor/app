@@ -50,20 +50,6 @@ module SessionsHelper
   end
 
 
-  #存储未登陆前想访问的网址
-  def store_location
-    #只有是GET请求时，才会存入session
-    session[:forward_url] = request.original_url if request.get?
-  end
-
-
-
-  # 重定向到存储的地址或者默认地址 
-  def redirect_back_to(default)
-    redirect_to(session[:forward_url] || default)
-    session.delete(:forwar_url) 
-  end
-
   #忘记持久会话
   def forget(user)
     user.forget
